@@ -25,6 +25,8 @@ class Attraction extends Model
         'image'
     ];
 
+    protected $casts = [ 'latitude' => 'float', 'longitude' => 'float' ];
+    
     public function opening_hours(): HasMany
     {
         return $this->hasMany(OpeningHour::class);
