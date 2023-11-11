@@ -26,9 +26,14 @@ class Attraction extends Model
     ];
 
     protected $casts = [ 'latitude' => 'float', 'longitude' => 'float' ];
-    
+
     public function opening_hours(): HasMany
     {
         return $this->hasMany(OpeningHour::class);
+    }
+
+    public function trip_items(): HasMany
+    {
+        return $this->hasMany(TripItem::class);
     }
 }
