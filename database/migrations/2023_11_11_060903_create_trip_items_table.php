@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('trip_items', function (Blueprint $table) {
             $table->id();
             $table->boolean('overlap');
-            $table->dateTimeTz('start');
-            $table->dateTimeTz('end');
+            $table->timestampTz('start');
+            $table->timestampTz('end');
             $table->unsignedInteger('trip_id')->nullable();
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('attraction_id')->nullable();
