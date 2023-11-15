@@ -13,6 +13,7 @@ class Trip extends Model
 
     protected $fillable = [
         'name',
+        'city',
         'start_date',
         'end_date',
         'user_id'

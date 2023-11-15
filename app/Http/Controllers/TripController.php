@@ -23,7 +23,23 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validate($request, [
+            'name' => 'required',
+            'city' => 'required',
+            'startDate' => 'required',
+            'endDate' => 'required',
+            'userId' => 'required',
+        ]);
+
+        $trip = Trip::create([
+            'name' => $validated['name'],
+            'city' => $validated['city'],
+            'start_date' => $validated['startDate'],
+            'end_date' => $validated['endDate'],
+            'user_id' => $validated['userId']
+        ]);
+
+        return new TripResource($trip);
     }
 
     /**
@@ -32,7 +48,7 @@ class TripController extends Controller
     public function show(string $id)
     {
         $trip = Trip::with('trip_items.attractions')->find($id);
-        return $trip;
+        return new TripResource($trip);
     }
 
     /**

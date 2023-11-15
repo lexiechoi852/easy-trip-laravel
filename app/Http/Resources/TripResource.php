@@ -18,7 +18,9 @@ class TripResource extends JsonResource
             'name' => $this->name,
             'startDate' => $this->start_date,
             'endDate' => $this->end_date,
+            'city' => $this->city,
             'tripItems' => TripItemResource::collection($this->trip_items),
+            'scheduleItems' => ScheduleItemResource::collection($this->schedule_items),
             'created_at_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),
                 'created_at' => $this->created_at
