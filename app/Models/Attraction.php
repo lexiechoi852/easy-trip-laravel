@@ -36,4 +36,9 @@ class Attraction extends Model
     {
         return $this->hasMany(TripItem::class);
     }
+
+    public function schedule_items(): HasMany
+    {
+        return $this->hasMany(ScheduleItem::class);
+    }
 }
