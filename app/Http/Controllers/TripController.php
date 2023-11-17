@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TripResource;
-use App\Models\Attraction;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 

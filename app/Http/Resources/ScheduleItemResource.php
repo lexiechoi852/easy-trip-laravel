@@ -18,7 +18,9 @@ class ScheduleItemResource extends JsonResource
             'id' => $this->id,
             'attractionId' => $this->attraction->id,
             'tripId' => $this->trip->id,
-            'name' => $this->attraction->name
+            'name' => $this->attraction->name,
+            'latitude' => $this->attraction->latitude,
+            'longitude' => $this->attraction->longitude
         ];
     }
 }

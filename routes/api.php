@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttractionController;
+use App\Http\Controllers\TripController;
+use App\Http\Controllers\ScheduleItemController;
+use App\Http\Controllers\TripItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +22,18 @@ use App\Http\Controllers\AttractionController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('users',  [UserController::class, 'store']);
 
 Route::apiResource('attractions', AttractionController::class);
+
+Route::apiResource('trips', TripController::class);
+
+Route::get('schedule-items/trip/{id}', [ScheduleItemController::class, 'getForTrip']);
+
+Route::apiResource('schedule-items', ScheduleItemController::class);
+
+Route::get('trip-items/trip/{id}', [TripItemController::class, 'getForTrip']);
+
+Route::apiResource('trip-items', TripItemController::class);
+
+

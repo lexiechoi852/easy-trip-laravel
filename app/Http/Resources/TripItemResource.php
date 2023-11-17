@@ -15,9 +15,11 @@ class TripItemResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' =>$this->id,
             'start' => $this->start,
             'end' => $this->end,
             'overlap' => $this->overlap,
+            'attraction' => new AttractionResource($this->attraction),
             'created_at_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),
                 'created_at' => $this->created_at

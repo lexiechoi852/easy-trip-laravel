@@ -10,8 +10,17 @@ class TripItem extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'overlap',
+        'start',
+        'end',
+        'trip_id',
+        'attraction_id',
+        'trip_id'
+    ];
+
     protected $casts = [ 'overlap' => 'boolean' ];
-    
+
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);

@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ScheduleItemResource;
-use App\Models\Attraction;
-use App\Models\ScheduleItem;
-use App\Models\Trip;
+use App\Http\Resources\TripItemResource;
+use App\Models\TripItem;
 use Illuminate\Http\Request;
 
-class ScheduleItemController extends Controller
+class TripItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -24,20 +22,22 @@ class ScheduleItemController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validate($request, [
+            'overlap' => 'required|boolean',
+            'start' => 'required',
+            'end' => 'required',
             'attractionId' => 'required',
             'tripId' => 'required',
         ]);
 
-        $attraction = Attraction::find($validated['attractionId']);
-
-        $trip = Trip::find($validated['tripId']);
-
-        $schedule_item = ScheduleItem::create([
-            'attraction_id' => $attraction->id,
-            'trip_id' => $trip->id
+        $trip_item = TripItem::create([
+            'overlap' => $validated['overlap'],
+            'start' => $validated['start'],
+            'end' => $validated['end'],
+            'attraction_id' => $validated['attractionId'],
+            'trip_id' => $validated['tripId']
         ]);
 
-        return new ScheduleItemResource($schedule_item);
+        return new TripItemResource($trip_item);
     }
 
     /**
@@ -61,14 +61,14 @@ class ScheduleItemController extends Controller
      */
     public function destroy(string $id)
     {
-        $schedule_item = ScheduleItem::find($id);
-        $schedule_item->delete();
-        return new ScheduleItemResource($schedule_item);
+        $trip_item = TripItem::find($id);
+        $trip_item->delete();
+        return new TripItemResource($trip_item);
     }
 
     public function getForTrip(string $trip_id) {
-        $schedule_items = ScheduleItem::where('trip_id', $trip_id)->get();
+        $trip_items = TripItem::where('trip_id', $trip_id)->get();
 
-        return ScheduleItemResource::collection($schedule_items);
+        return TripItemResource::collection($trip_items);
     }
 }
