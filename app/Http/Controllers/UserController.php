@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -59,5 +62,38 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        $validated = $this->validate($request, [
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string']
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
+
+            throw ValidationException::withMessages([
+                'message' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json([
+            'success' => true,
+            'user' => new UserResource($user),
+            'accessToken' => $token,
+            'message' => 'Login successful',
+        ], Response::HTTP_OK);
+    }
+    public function logout()
+    {
+        Auth::user()->tokens()->delete();
+        return response()->json([
+            'message' => 'Logged out successfully',
+        ]);
     }
 }
