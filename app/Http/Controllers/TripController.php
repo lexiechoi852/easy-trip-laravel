@@ -65,4 +65,10 @@ class TripController extends Controller
     {
         //
     }
+
+    public function getForUser(string $user_id) {
+        $trips = Trip::where('user_id', $user_id)->get();
+
+        return TripResource::collection($trips);
+    }
 }
