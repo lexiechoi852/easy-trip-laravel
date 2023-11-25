@@ -53,7 +53,19 @@ class TripItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $this->validate($request, [
+            'start' => 'required',
+            'end' => 'required',
+        ]);
+
+        $trip_item = TripItem::findOrFail($id);
+
+        $trip_item->start = $validated['start'];
+        $trip_item->end = $validated['end'];
+
+        $trip_item->save();
+
+        return new TripItemResource($trip_item);
     }
 
     /**
@@ -61,7 +73,7 @@ class TripItemController extends Controller
      */
     public function destroy(string $id)
     {
-        $trip_item = TripItem::find($id);
+        $trip_item = TripItem::findOrFail($id);
         $trip_item->delete();
         return new TripItemResource($trip_item);
     }

@@ -61,7 +61,7 @@ class ScheduleItemController extends Controller
      */
     public function destroy(string $id)
     {
-        $schedule_item = ScheduleItem::find($id);
+        $schedule_item = ScheduleItem::findOrFail($id);
         $schedule_item->delete();
         return new ScheduleItemResource($schedule_item);
     }
