@@ -35,8 +35,7 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Expose port for PHP-FPM
-EXPOSE 9000
+EXPOSE 8000
 
 # Use entrypoint script
 ENTRYPOINT ["docker-entrypoint.sh"]
