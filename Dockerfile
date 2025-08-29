@@ -28,7 +28,15 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Expose port
+# Set permissions for Laravel
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Expose port for PHP-FPM
 EXPOSE 9000
 
-CMD ["php-fpm"]
+# Use entrypoint script
+ENTRYPOINT ["docker-entrypoint.sh"]
