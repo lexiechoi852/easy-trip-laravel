@@ -12,6 +12,8 @@ services:
         volumes:
             - .:/var/www
             - ./storage:/var/www/storage
+        depends_on:
+            - db
         networks:
             - laravel
         env_file:
@@ -37,8 +39,6 @@ services:
             POSTGRES_DB: ${DB_DATABASE}
             POSTGRES_USER: ${DB_USERNAME}
             POSTGRES_PASSWORD: ${DB_PASSWORD}
-        volumes:
-            - dbdata:/var/lib/postgresql/data
         ports:
             - "5432:5432"
         networks:
@@ -48,6 +48,3 @@ services:
 
 networks:
     laravel:
-
-volumes:
-    dbdata:
