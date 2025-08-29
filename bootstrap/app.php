@@ -14,7 +14,6 @@
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
-
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
@@ -41,6 +40,13 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$environmentFile = '.env';
+
+if (getenv('APP_ENV') === 'production') {
+    $environmentFile = '.env.production';
+}
+
+$app->loadEnvironmentFrom($environmentFile);
 /*
 |--------------------------------------------------------------------------
 | Return The Application
