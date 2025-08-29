@@ -10,4 +10,4 @@ php artisan db:seed --force
 # Start PHP-FPM
 php-fpm
 
-php artisan serve --host 0.0.0.0 --port $PORT
+php artisan serve --host 0.0.0.0
