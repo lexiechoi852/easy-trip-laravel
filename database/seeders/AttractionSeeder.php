@@ -35,7 +35,7 @@ class AttractionSeeder extends Seeder
             'place_id' => 'ChIJmzrzi9Y0K4gRgXUc3sTY7RU',
             'latitude' => 43.642566,
             'longitude' => -79.387057,
-            'image' => 'https://www.cntower.ca/sites/default/files/styles/16_9_scale_and_crop_large/public/images/explore-cn-tower%20.jpg?h=5ce0254a&itok=A_rLcJHm',
+            'image' => 'https://www.cntower.ca/sites/default/files/styles/twitter_large_image/public/images/explore-cn-tower%20.jpg.webp?itok=-Jy7_r4f',
             'url' => 'www.cntower.ca',
             'country_code' => '1',
             'telephone' => '4168686937',
