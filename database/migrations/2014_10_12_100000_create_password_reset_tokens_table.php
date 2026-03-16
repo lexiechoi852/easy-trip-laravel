@@ -9,6 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    public $withinTransaction = false;
+    
     public function up(): void
     {
         Schema::create('password_reset_tokens', function (Blueprint $table) {
